@@ -1,0 +1,47 @@
+kubeApiExternalUrl: ""
+
+manager:
+  logLevel: 1
+  keycloakDebug: false
+  ovnDbIps: ""
+  kubernetesAuthConfig:
+    path: /etc/rancher
+    filename: auth-conf.yaml
+  keycloakSecret:
+    url: http://keycloak.kube-dc.localtest.me
+    user: admin
+    password: admin123
+    masterRealm: master
+    consoleUrl: http://frontend.kube-dc.localtest.me
+  image:
+    repository: shalb/kube-dc-manager
+    pullPolicy: IfNotPresent
+    # tag uses .Chart.AppVersion if omitted
+  nodeSelector: {}
+
+frontend:
+  image:
+    repository: shalb/kube-dc-ui-frontend
+    pullPolicy: IfNotPresent
+  ingress:
+    enabled: true
+    className: nginx
+    annotations: {}
+    host: frontend.kube-dc.localtest.me
+    tls:
+      enabled: false
+      secretName: kube-dc-frontend
+
+backend:
+  keycloakUrl: http://keycloak.kube-dc.localtest.me
+  image:
+    repository: shalb/kube-dc-ui-backend
+    pullPolicy: IfNotPresent
+  ingress:
+    enabled: true
+    className: nginx
+    annotations: {}
+    host: backend.kube-dc.localtest.me
+    tls:
+      enabled: false
+      secretName: kube-dc-backend

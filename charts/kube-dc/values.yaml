@@ -1,0 +1,46 @@
+# Default values for Kube-DC developer preview. See examples/single-node/values.dev.yaml for overrides.
+
+kubeApiExternalUrl: ""
+
+manager:
+  logLevel: 1
+  keycloakDebug: false
+  ovnDbIps: ""
+  kubernetesAuthConfig:
+    path: /etc/rancher
+    filename: auth-conf.yaml
+  keycloakSecret: {}
+  image:
+    repository: shalb/kube-dc-manager
+    pullPolicy: IfNotPresent
+  nodeSelector: {}
+  resources: {}
+
+frontend:
+  image:
+    repository: shalb/kube-dc-ui-frontend
+    pullPolicy: IfNotPresent
+  ingress:
+    enabled: true
+    className: nginx
+    annotations: {}
+    host: frontend.kube-dc.localtest.me
+    tls:
+      enabled: false
+      secretName: kube-dc-frontend
+  resources: {}
+
+backend:
+  keycloakUrl: ""
+  image:
+    repository: shalb/kube-dc-ui-backend
+    pullPolicy: IfNotPresent
+  ingress:
+    enabled: true
+    className: nginx
+    annotations: {}
+    host: backend.kube-dc.localtest.me
+    tls:
+      enabled: false
+      secretName: kube-dc-backend
+  resources: {}
