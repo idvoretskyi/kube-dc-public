@@ -10,4 +10,5 @@ Quick start:
   - Keycloak: http://keycloak.kube-dc.localtest.me/
 
 Teardown:
-- `k3d cluster delete kdc`
+- To remove cluster and components: `./uninstall.sh`
+- To also remove local state (~/.kube-dc): `./uninstall.sh --purge`
