@@ -1,0 +1,30 @@
+apiVersion: k3d.io/v1alpha5
+kind: Simple
+metadata:
+  name: kdc
+servers: 1
+agents: 0
+kubeAPI:
+  hostIP: 127.0.0.1
+  hostPort: "6445"
+options:
+  k3d:
+    wait: true
+    timeout: "120s"
+  k3s:
+    extraArgs:
+      - arg: --disable=traefik
+        nodeFilters:
+          - server:0
+  kubeconfig:
+    updateDefaultKubeconfig: true
+    switchCurrentContext: true
+ports:
+  - port: 80:80@loadbalancer
+  - port: 443:443@loadbalancer
+volumes:
+  # Bind mount for auth configuration expected by the manager
+  - volume: $HOME/.kube-dc:/etc/rancher
+    nodeFilters:
+      - server:0
+registries: {}

@@ -11,6 +11,7 @@ nav:
   - Quick Start:
     - Overview: quickstart-overview.md
     - Deployment on Hetzner: quickstart-hetzner.md
+  - Single-node Preview: quickstart-single-node.md
     # - Minimal HA Setup: quickstart-ha.md
     # - Installing on Existing K8s: quickstart-existing-k8s.md
   - Architecture & Concepts:
